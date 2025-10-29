@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Selamat Tidur Mutia Wahyuno</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#0f1724;
+      --accent:#7be3ff;
+      --text:#e6f7ff;
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 20%, #071226 0%, transparent 15%),
+                  radial-gradient(1000px 500px at 90% 80%, #121026 0%, transparent 12%),
+                  var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:3rem;
+      box-sizing:border-box;
+    }
+
+    .card{
+      max-width:900px;
+      width:100%;
+      padding:2.5rem;
+      border-radius:20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 10px 30px rgba(2,8,23,0.6);
+      text-align:center;
+      backdrop-filter: blur(6px) saturate(120%);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    h1{
+      margin:0 0 1rem 0;
+      font-weight:800;
+      font-size: clamp(22px, 3vw, 38px);
+      letter-spacing:0.06em;
+      line-height:1.02;
+      text-transform:uppercase;
+      color:var(--text);
+      text-shadow:
+        0 6px 20px rgba(0,0,0,0.6),
+        0 0 30px rgba(123,227,255,0.08);
+      display:inline-block;
+      padding:0.2rem 0.6rem;
+      border-radius:8px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* typewriter-ish reveal */
+    .typewrap{
+      display:inline-block;
+      position:relative;
+      overflow:hidden;
+      vertical-align:middle;
+      box-decoration-break: clone;
+    }
+    .typewrap::after{
+      content:"";
+      position:absolute;
+      right:0;
+      top:0;
+      bottom:0;
+      width:2px;
+      background:linear-gradient(180deg, var(--accent), transparent);
+      animation: blink 1s steps(1) infinite;
+      transform: translateX(0);
+    }
+    @keyframes blink{
+      50%{ opacity:0 }
+    }
+
+    .reveal{
+      display:inline-block;
+      white-space:nowrap;
+      transform:translateX(-0%);
+      animation: reveal 2.2s steps(40,end) 0.2s forwards;
+      background: linear-gradient(90deg, rgba(123,227,255,0.85), rgba(255,255,255,0.9));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+    }
+    @keyframes reveal {
+      from { width:0; max-width:0; }
+      to { width:100%; max-width:100%; }
+    }
+
+    p.lead{
+      margin:0.6rem 0 1.4rem 0;
+      color: #cfeff8;
+      opacity:0.9;
+      font-size:clamp(14px, 2.4vw, 18px);
+    }
+
+    .controls{
+      display:flex;
+      gap:0.6rem;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:1rem;
+    }
+
+    button{
+      appearance:none;
+      border:0;
+      padding:0.6rem 1rem;
+      border-radius:10px;
+      font-weight:600;
+      cursor:pointer;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.04);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    button:active{ transform:translateY(1px) scale(.997); }
+
+    .btn-accent{
+      box-shadow: 0 6px 18px rgba(123,227,255,0.08);
+      border:1px solid rgba(123,227,255,0.18);
+    }
+
+    /* soft twinkling stars */
+    .stars{
+      pointer-events:none;
+      position:fixed;
+      inset:0;
+      z-index:0;
+    }
+    .star{
+      position:absolute;
+      width:2px;
+      height:2px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.9);
+      opacity:0.0;
+      animation: twinkle linear infinite;
+    }
+    @keyframes twinkle{
+      0% { opacity:0 }
+      20% { opacity:0.95; transform: scale(1.2) }
+      100% { opacity:0 }
+    }
+
+    footer{
+      margin-top:1.6rem;
+      color: rgba(255,255,255,0.55);
+      font-size:12px;
+    }
+
+    /* responsive */
+    @media (max-width:520px){
+      .card{ padding:1.5rem; border-radius:14px; }
+      p.lead{ font-size:14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="wrap">
+    <div class="card" role="main" aria-live="polite">
+      <h1>
+        <span class="typewrap">
+          <span class="reveal" id="greeting">SELAMAT TIDUR MUTIA WAHYUNO</span>
+        </span>
+      </h1>
+
+      <p class="lead">Semoga mimpi indah ✨</p>
+
+      <div class="controls" aria-hidden="false">
+        <button id="toggleSound" class="btn-accent">Bunyi: On</button>
+        <button id="nightMode">Mode Malam</button>
+        <button id="bigText">Perbesar Teks</button>
+        <button id="reset">Reset</button>
+      </div>
+
+      <footer>Halaman sederhana — simpan sebagai <code>index.html</code> dan buka di browser.</footer>
+    </div>
+  </div>
+
+  <!-- optional tiny sound (base64 short chime) -->
+  <audio id="chime" preload="auto">
+    <source src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAA..." type="audio/mpeg">
+    <!-- jika browser tidak mendukung inline base64 mp3, suara akan tidak muncul. -->
+  </audio>
+
+  <script>
+    // NOTE: the base64 audio above is left intentionally short to avoid large payload.
+    // If you want a real chime, replace the <source> src with a real file URL.
+
+    // small utilities
+    const chime = document.getElementById('chime');
+    const toggleSoundBtn = document.getElementById('toggleSound');
+    const nightBtn = document.getElementById('nightMode');
+    const bigTextBtn = document.getElementById('bigText');
+    const resetBtn = document.getElementById('reset');
+    const greeting = document.getElementById('greeting');
+
+    let soundOn = true;
+    let big = false;
+    let night = true;
+
+    // play sound on load if allowed
+    function tryPlaySound(){
+      if(!soundOn) return;
+      if(!chime || !chime.play) return;
+      chime.currentTime = 0;
+      // browsers may block autoplay; this attempt is safe
+      chime.play().catch(()=>{/* ignore */});
+    }
+
+    // star field generator
+    function makeStars(count=40){
+      const container = document.getElementById('stars');
+      for(let i=0;i<count;i++){
+        const s = document.createElement('div');
+        s.className='star';
+        const left = Math.random()*100;
+        const top = Math.random()*100;
+        const dur = 1.2 + Math.random()*2.2;
+        const delay = Math.random()*4;
+        s.style.left = left + '%';
+        s.style.top = top + '%';
+        s.style.width = (1 + Math.random()*2) + 'px';
+        s.style.height = s.style.width;
+        s.style.animationDuration = dur + 's';
+        s.style.animationDelay = delay + 's';
+        s.style.opacity = 0;
+        container.appendChild(s);
+      }
+    }
+
+    // initial actions
+    makeStars(48);
+    // animate reveal is CSS-based; play sound and add small glow after reveal
+    window.addEventListener('load', ()=>{
+      tryPlaySound();
+      // add a soft glow after reveal animation completes
+      setTimeout(()=> greeting.style.textShadow = '0 10px 40px rgba(123,227,255,0.18), 0 2px 8px rgba(0,0,0,0.6)', 2600);
+    });
+
+    toggleSoundBtn.addEventListener('click', ()=>{
+      soundOn = !soundOn;
+      toggleSoundBtn.textContent = 'Bunyi: ' + (soundOn? 'On':'Off');
+      if(soundOn) tryPlaySound();
+    });
+
+    nightBtn.addEventListener('click', ()=>{
+      night = !night;
+      if(night){
+        document.documentElement.style.setProperty('--bg','#0b1020');
+        document.documentElement.style.setProperty('--card','#0f1724');
+      } else {
+        document.documentElement.style.setProperty('--bg','#f6f9ff');
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--text','#0b1020');
+      }
+    });
+
+    bigTextBtn.addEventListener('click', ()=>{
+      big = !big;
+      if(big) greeting.style.fontSize = 'clamp(36px, 10vw, 110px)';
+      else greeting.style.fontSize = '';
+    });
+
+    resetBtn.addEventListener('click', ()=>{
+      // reset page state
+      soundOn = true; big=false; night=true;
+      toggleSoundBtn.textContent = 'Bunyi: On';
+      greeting.style.fontSize = '';
+      document.documentElement.style.setProperty('--bg','#0b1020');
+      document.documentElement.style.setProperty('--card','#0f1724');
+      // replay reveal animation
+      greeting.classList.remove('reveal');
+      void greeting.offsetWidth;
+      greeting.classList.add('reveal');
+      tryPlaySound();
+    });
+
+    // accessibility: allow Enter key on focused buttons
+    document.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('keyup', (e)=> { if(e.key === 'Enter') btn.click(); });
+    });
+
+  </script>
+</body>
+</html>
